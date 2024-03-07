@@ -4,7 +4,6 @@ using Orders.Shared.Entities;
 
 namespace Orders.Frontend.Pages.Countries
 {
-    //partial dos clases que se llaman igual pero que al compilarse se vuelven una
     public partial class CountriesIndex
     {
         [Inject] private IRepository Repository { get; set; } = null!;
