@@ -11,8 +11,8 @@ using Orders.Backend.Data;
 namespace Orders.Backend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240224211152_AddCountriesEntity")]
-    partial class AddCountriesEntity
+    [Migration("20240310202708_AddCategoryEntity")]
+    partial class AddCategoryEntity
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,6 +23,27 @@ namespace Orders.Backend.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("Orders.Shared.Entities.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("Categories");
+                });
 
             modelBuilder.Entity("Orders.Shared.Entities.Country", b =>
                 {
