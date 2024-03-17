@@ -2,11 +2,11 @@
 
 <h3>Editar País</h3>
 
-@if (country is null)
+@if(country is null)
 {
-    <Loading />
+    <Loading/>
 }
 else
 {
-    <CountryForm @ref="countryForm" Country="country" OnValidSubmit="EditAsync" ReturnAction="Return" />
+    <FormWithName @ref="countryForm" Label="País:" Model="country" OnValidSubmit="EditAsync" ReturnAction="Return" />
 }
