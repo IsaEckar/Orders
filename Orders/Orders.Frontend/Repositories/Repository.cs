@@ -12,13 +12,10 @@ namespace Orders.Frontend.Repositories
             PropertyNameCaseInsensitive = true
         };
 
-        //Constructor
         public Repository(HttpClient httpClient)
         {
             _httpClient = httpClient;
         }
-
-        //Metodos publicos
 
         public async Task<HttpResponseWrapper<T>> GetAsync<T>(string url)
         {
@@ -51,14 +48,13 @@ namespace Orders.Frontend.Repositories
             }
             return new HttpResponseWrapper<TActionResponse>(default, true, responseHttp);
         }
-        //Delete
+
         public async Task<HttpResponseWrapper<object>> DeleteAsync<T>(string url)
         {
             var responseHttp = await _httpClient.DeleteAsync(url);
             return new HttpResponseWrapper<object>(null, !responseHttp.IsSuccessStatusCode, responseHttp); ;
         }
 
-        //Put
         public async Task<HttpResponseWrapper<object>> PutAsync<T>(string url, T model)
         {
             var messageJson = JsonSerializer.Serialize(model);
@@ -67,7 +63,6 @@ namespace Orders.Frontend.Repositories
             return new HttpResponseWrapper<object>(null, !responseHttp.IsSuccessStatusCode, responseHttp); ;
         }
 
-        //Put que devuelve Respuesta
         public async Task<HttpResponseWrapper<TActionResponse>> PutAsync<T, TActionResponse>(string url, T model)
         {
             var messageJson = JsonSerializer.Serialize(model);
@@ -81,7 +76,6 @@ namespace Orders.Frontend.Repositories
             return new HttpResponseWrapper<TActionResponse>(default, true, responseHttp);
         }
 
-        //Metodo Privado
         private async Task<T> UnserializeAnswerAsync<T>(HttpResponseMessage responseHttp)
         {
             var response = await responseHttp.Content.ReadAsStringAsync();
